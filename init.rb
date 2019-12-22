@@ -20,8 +20,8 @@ Redmine::Plugin.register :redmine_cors do
   url 'http://github.com/mavimo/redmine_cors'
   author_url 'http://mavimo.org/'
 
-  version '0.0.1'
-  requires_redmine :version_or_higher => '2.0.0'
+  version '0.0.4'
+  requires_redmine :version_or_higher => '4.0.0'
 
   settings :partial => 'settings/cors_settings',
     :default => {
