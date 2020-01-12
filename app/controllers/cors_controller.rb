@@ -1,8 +1,11 @@
 class CorsController < ApplicationController
-  skip_before_action :session_expiration, :user_setup, :check_if_login_required, :set_localization
+  skip_before_action :session_expiration, :user_setup, :check_if_login_required, :set_localization, :verify_authenticity_token 
 
   def preflight
     allowed_origins = Setting.plugin_redmine_cors["cors_domain"].to_s.downcase.split(/[ ,]/).reject { |c| c.empty? }
+  #  puts "#### allowed_origins: "
+  #  puts "request.headers[origin]: "+ request.headers["Origin"]
+   # STDOUT.flush
     if not request.headers["Origin"].nil?
         if allowed_origins.include?("*") || allowed_origins.include?(request.headers["Origin"].to_s.downcase)
             headers['Access-Control-Allow-Origin'] = request.headers["Origin"].to_s
